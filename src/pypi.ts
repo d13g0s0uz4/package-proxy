@@ -154,7 +154,7 @@ function enforcePyMinAge(body : string, min_days : number, allowedVers : string[
 	}
 	//console.log(filteredVersionSet);
 	pkgdata.files = pkgdata.files.filter((elem : { "upload-time" : string, "filename" : string }) =>
-		Math.abs(now.getTime() - (new Date(elem['upload-time'])).getTime()) >= min_millis && !allowedVers.includes(elem['filename'].split("-")[1]));
+		Math.abs(now.getTime() - (new Date(elem['upload-time'])).getTime()) >= min_millis || allowedVers.includes(elem['filename'].split("-")[1]));
 	pkgdata.versions = pkgdata.versions.filter((v : string) => !filteredVersionSet.has(v));
 	return JSON.stringify(pkgdata);
 }
